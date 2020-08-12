@@ -117,7 +117,7 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.indi.outerLoopGain = 2.0
       ret.lateralTuning.indi.timeConstant = 1.0
       ret.lateralTuning.indi.actuatorEffectiveness = 1.5
-      ret.steerActuatorDelay = 0.08 # Stinger GT Limited AWD 3.3T stock value (Tunder's 2020) 
+      ret.steerActuatorDelay = 0.08 # Stinger GT Limited AWD 3.3T stock value (Tunder's 2020)
       ret.steerLimitTimer = 0.4 # stock is 0.01 but 0.04 seems to work well
       tire_stiffness_factor = 1.125 # LiveParameters (Tunder's 2020)
       ret.steerRateCost = 1.0
@@ -136,7 +136,7 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kf = 0.00006
       ret.mass = 1685. + STD_CARGO_KG
       ret.wheelbase = 2.7
-      ret.steerRatio = 13.73   
+      ret.steerRatio = 13.73
       tire_stiffness_factor = 0.385
       ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
       ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25], [0.05]]
@@ -251,7 +251,7 @@ class CarInterface(CarInterfaceBase):
     ret.radarOffCan = ret.sccBus == -1
     ret.openpilotLongitudinalControl = False #TODO make ui toggle
     ret.enableCruise = not ret.radarOffCan
-    ret.autoLcaEnabled = False
+    ret.autoLcaEnabled = True
     ret.spasEnabled = False
 
     return ret
@@ -279,7 +279,7 @@ class CarInterface(CarInterfaceBase):
 
     # turning indicator alert logic
     if (ret.leftBlinker or ret.rightBlinker or self.CC.turning_signal_timer) and ret.vEgo < LANE_CHANGE_SPEED_MIN - 1.2:
-      self.CC.turning_indicator_alert = True 
+      self.CC.turning_indicator_alert = True
     else:
       self.CC.turning_indicator_alert = False
 
@@ -297,7 +297,7 @@ class CarInterface(CarInterfaceBase):
     buttonEvents = []
     if self.CS.cruise_buttons != self.CS.prev_cruise_buttons:
       be = car.CarState.ButtonEvent.new_message()
-      be.pressed = self.CS.cruise_buttons != 0 
+      be.pressed = self.CS.cruise_buttons != 0
       but = self.CS.cruise_buttons if be.pressed else self.CS.prev_cruise_buttons
       if but == Buttons.RES_ACCEL:
         be.type = ButtonType.accelCruise
